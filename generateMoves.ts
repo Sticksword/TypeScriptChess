@@ -115,15 +115,7 @@ function generateStraights(row, col, color): string[] {
   var moves: string[] = [];
   var targetRow: number = parseInt(row) - 1;
   while(targetRow >= 0) { // generate north path
-    var target = document.getElementById(targetRow + "-" + col).innerHTML;
-    if (target === "") {
-      moves.push(targetRow + "-" + col);
-    } else {
-      var targetPiece = pieces[target];
-      var arr = targetPiece.split("_");
-      if (arr[0] != color) {
-        moves.push(targetRow + "-" + col);
-      }
+    if (!addValidSpot(moves, targetRow, col, color)) {
       break;
     }
     targetRow--;
@@ -131,15 +123,7 @@ function generateStraights(row, col, color): string[] {
 
   targetRow = parseInt(row) + 1;
   while(targetRow < 8) { // generate south path
-    var target = document.getElementById(targetRow + "-" + col).innerHTML;
-    if (target === "") {
-      moves.push(targetRow + "-" + col);
-    } else {
-      var targetPiece = pieces[target];
-      var arr = targetPiece.split("_");
-      if (arr[0] != color) {
-        moves.push(targetRow + "-" + col);
-      }
+    if (!addValidSpot(moves, targetRow, col, color)) {
       break;
     }
     targetRow++;
@@ -147,15 +131,7 @@ function generateStraights(row, col, color): string[] {
 
   var targetCol = parseInt(col) - 1;
   while(targetCol >= 0) { // generate west path
-    var target = document.getElementById(row + "-" + targetCol).innerHTML;
-    if (target === "") {
-      moves.push(row + "-" + targetCol);
-    } else {
-      var targetPiece = pieces[target];
-      var arr = targetPiece.split("_");
-      if (arr[0] != color) {
-        moves.push(row + "-" + targetCol);
-      }
+    if (!addValidSpot(moves, row, targetCol, color)) {
       break;
     }
     targetCol--;
@@ -163,15 +139,7 @@ function generateStraights(row, col, color): string[] {
 
   targetCol = parseInt(col) + 1;
   while(targetCol < 8) { // generate east path
-    var target = document.getElementById(row + "-" + targetCol).innerHTML;
-    if (target === "") {
-      moves.push(row + "-" + targetCol);
-    } else {
-      var targetPiece = pieces[target];
-      var arr = targetPiece.split("_");
-      if (arr[0] != color) {
-        moves.push(row + "-" + targetCol);
-      }
+    if (!addValidSpot(moves, row, targetCol, color)) {
       break;
     }
     targetCol++;
@@ -185,107 +153,35 @@ function generateKingMoves(row, col, color): string[] {
   var targetRow: number = parseInt(row) - 1;
   var targetCol: number = parseInt(col) - 1;
   if (targetRow >= 0 && targetCol >= 0) { // -1, -1
-    var target = document.getElementById(targetRow + "-" + targetCol).innerHTML;
-    if (target === "") {
-      moves.push(targetRow + "-" + targetCol);
-    } else {
-      var targetPiece = pieces[target];
-      var arr = targetPiece.split("_");
-      if (arr[0] != color) {
-        moves.push(targetRow + "-" + targetCol);
-      }
-    }
+    addValidSpot(moves, targetRow, targetCol, color);
   }
   targetRow++;
   if (targetCol >= 0) { // 0, -1
-    var target = document.getElementById(targetRow + "-" + targetCol).innerHTML;
-    if (target === "") {
-      moves.push(targetRow + "-" + targetCol);
-    } else {
-      var targetPiece = pieces[target];
-      var arr = targetPiece.split("_");
-      if (arr[0] != color) {
-        moves.push(targetRow + "-" + targetCol);
-      }
-    }
+    addValidSpot(moves, targetRow, targetCol, color);
   }
   targetRow++;
   if (targetRow < 8 && targetCol >= 0) { // +1, -1
-    var target = document.getElementById(targetRow + "-" + targetCol).innerHTML;
-    if (target === "") {
-      moves.push(targetRow + "-" + targetCol);
-    } else {
-      var targetPiece = pieces[target];
-      var arr = targetPiece.split("_");
-      if (arr[0] != color) {
-        moves.push(targetRow + "-" + targetCol);
-      }
-    }
+    addValidSpot(moves, targetRow, targetCol, color);
   }
   targetCol++;
   if (targetRow < 8) { // +1, 0
-    var target = document.getElementById(targetRow + "-" + targetCol).innerHTML;
-    if (target === "") {
-      moves.push(targetRow + "-" + targetCol);
-    } else {
-      var targetPiece = pieces[target];
-      var arr = targetPiece.split("_");
-      if (arr[0] != color) {
-        moves.push(targetRow + "-" + targetCol);
-      }
-    }
+    addValidSpot(moves, targetRow, targetCol, color);
   }
   targetRow -= 2; // skipping 0, 0
   if (targetRow >= 0) { // -1, 0
-    var target = document.getElementById(targetRow + "-" + targetCol).innerHTML;
-    if (target === "") {
-      moves.push(targetRow + "-" + targetCol);
-    } else {
-      var targetPiece = pieces[target];
-      var arr = targetPiece.split("_");
-      if (arr[0] != color) {
-        moves.push(targetRow + "-" + targetCol);
-      }
-    }
+    addValidSpot(moves, targetRow, targetCol, color);
   }
   targetCol++;
   if (targetRow >= 0 && targetCol < 8) { // -1, +1
-    var target = document.getElementById(targetRow + "-" + targetCol).innerHTML;
-    if (target === "") {
-      moves.push(targetRow + "-" + targetCol);
-    } else {
-      var targetPiece = pieces[target];
-      var arr = targetPiece.split("_");
-      if (arr[0] != color) {
-        moves.push(targetRow + "-" + targetCol);
-      }
-    }
+    addValidSpot(moves, targetRow, targetCol, color);
   }
   targetRow++;
   if (targetCol < 8) { // 0, +1
-    var target = document.getElementById(targetRow + "-" + targetCol).innerHTML;
-    if (target === "") {
-      moves.push(targetRow + "-" + targetCol);
-    } else {
-      var targetPiece = pieces[target];
-      var arr = targetPiece.split("_");
-      if (arr[0] != color) {
-        moves.push(targetRow + "-" + targetCol);
-      }
-    }
+    addValidSpot(moves, targetRow, targetCol, color);
   }
   targetRow++;
   if (targetRow < 8 && targetCol < 8) { // +1, +1
-    var target = document.getElementById(targetRow + "-" + targetCol).innerHTML;
-    if (target === "") {
-      moves.push(targetRow + "-" + targetCol);
-    } else {
-      var targetPiece = pieces[target];
-      var arr = targetPiece.split("_");
-      if (arr[0] != color) {
-        moves.push(targetRow + "-" + targetCol);
-      }
-    }
+    addValidSpot(moves, targetRow, targetCol, color);
   }
   return moves;
 }
@@ -305,113 +201,41 @@ function generateKnightMoves(row, col, color): string[] {
   var targetRow: number = parseInt(row) - 2;
   var targetCol: number = parseInt(col) - 1;
   if (targetRow >= 0 && targetCol >= 0) {
-    var target = document.getElementById(targetRow + "-" + targetCol).innerHTML;
-    if (target === "") {
-      moves.push(targetRow + "-" + targetCol);
-    } else {
-      var targetPiece = pieces[target];
-      var arr = targetPiece.split("_");
-      if (arr[0] != color) {
-        moves.push(targetRow + "-" + targetCol);
-      }
-    }
+    addValidSpot(moves, targetRow, targetCol, color);
   }
   targetCol = parseInt(col) + 1;
   if (targetRow >= 0 && targetCol < 8) {
-    var target = document.getElementById(targetRow + "-" + targetCol).innerHTML;
-    if (target === "") {
-      moves.push(targetRow + "-" + targetCol);
-    } else {
-      var targetPiece = pieces[target];
-      var arr = targetPiece.split("_");
-      if (arr[0] != color) {
-        moves.push(targetRow + "-" + targetCol);
-      }
-    }
+    addValidSpot(moves, targetRow, targetCol, color);
   }
 
   targetRow = parseInt(row) - 1;
   targetCol = parseInt(col) - 2;
   if (targetRow >= 0 && targetCol >= 0) {
-    var target = document.getElementById(targetRow + "-" + targetCol).innerHTML;
-    if (target === "") {
-      moves.push(targetRow + "-" + targetCol);
-    } else {
-      var targetPiece = pieces[target];
-      var arr = targetPiece.split("_");
-      if (arr[0] != color) {
-        moves.push(targetRow + "-" + targetCol);
-      }
-    }
+    addValidSpot(moves, targetRow, targetCol, color);
   }
   targetCol = parseInt(col) + 2;
   if (targetRow >= 0 && targetCol < 8) {
-    var target = document.getElementById(targetRow + "-" + targetCol).innerHTML;
-    if (target === "") {
-      moves.push(targetRow + "-" + targetCol);
-    } else {
-      var targetPiece = pieces[target];
-      var arr = targetPiece.split("_");
-      if (arr[0] != color) {
-        moves.push(targetRow + "-" + targetCol);
-      }
-    }
+    addValidSpot(moves, targetRow, targetCol, color);
   }
 
   targetRow = parseInt(row) + 1;
   targetCol = parseInt(col) - 2;
   if (targetRow < 8 && targetCol >= 0) {
-    var target = document.getElementById(targetRow + "-" + targetCol).innerHTML;
-    if (target === "") {
-      moves.push(targetRow + "-" + targetCol);
-    } else {
-      var targetPiece = pieces[target];
-      var arr = targetPiece.split("_");
-      if (arr[0] != color) {
-        moves.push(targetRow + "-" + targetCol);
-      }
-    }
+    addValidSpot(moves, targetRow, targetCol, color);
   }
   targetCol = parseInt(col) + 2;
   if (targetRow < 8 && targetCol < 8) {
-    var target = document.getElementById(targetRow + "-" + targetCol).innerHTML;
-    if (target === "") {
-      moves.push(targetRow + "-" + targetCol);
-    } else {
-      var targetPiece = pieces[target];
-      var arr = targetPiece.split("_");
-      if (arr[0] != color) {
-        moves.push(targetRow + "-" + targetCol);
-      }
-    }
+    addValidSpot(moves, targetRow, targetCol, color);
   }
 
   targetRow = parseInt(row) + 2;
   targetCol = parseInt(col) - 1;
   if (targetRow < 8 && targetCol >= 0) {
-    var target = document.getElementById(targetRow + "-" + targetCol).innerHTML;
-    if (target === "") {
-      moves.push(targetRow + "-" + targetCol);
-    } else {
-      var targetPiece = pieces[target];
-      var arr = targetPiece.split("_");
-      if (arr[0] != color) {
-        moves.push(targetRow + "-" + targetCol);
-      }
-    }
+    addValidSpot(moves, targetRow, targetCol, color);
   }
   targetCol = parseInt(col) + 1;
   if (targetRow < 8 && targetCol < 8) {
-    var target = document.getElementById(targetRow + "-" + targetCol).innerHTML;
-    if (target === "") {
-      moves.push(targetRow + "-" + targetCol);
-    } else {
-      var targetPiece = pieces[target];
-      var arr = targetPiece.split("_");
-      if (arr[0] != color) {
-        moves.push(targetRow + "-" + targetCol);
-      }
-    }
+    addValidSpot(moves, targetRow, targetCol, color);
   }
   
   return moves;
