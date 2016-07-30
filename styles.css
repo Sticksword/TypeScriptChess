@@ -1,0 +1,48 @@
+body {
+  margin: 0 auto;
+  max-width: 50em;
+}
+
+#turn {
+  text-align: center;
+}
+
+#game_container {
+  width: 826px;
+}
+
+.board {
+  border: 3px solid green;
+  padding: 10px;
+  width: 800px;
+  height: 800px;
+  margin: auto;
+}
+
+.tile {
+  width: 100px;
+  height: 100px;
+  float: left;
+  text-align: center;
+  vertical-align: middle;
+  font-size: 75px;
+  /*this is to ensure high-lighted moves don't expand the tiles*/
+  box-sizing: border-box; 
+}
+
+.occupied {
+  cursor: pointer;
+}
+
+.black {
+  background-color: gray;
+}
+
+.white {
+
+}
+
+.valid {
+  border: 5px solid yellow;
+  cursor: pointer;
+}
