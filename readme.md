@@ -1,4 +1,4 @@
-I am fiddling with TypeScript by porting an old Chess implementation.
+I am fiddling with TypeScript by porting my old Chess implementation.
 
 SETUP:
 * Download zip or clone repo
