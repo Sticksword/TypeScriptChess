@@ -1,3 +1,5 @@
+I am fiddling with TypeScript by porting an old Chess implementation.
+
 SETUP:
 * Download zip or clone repo
 * cd into project folder and run `tsc appSetup.ts generateMoves.ts`
@@ -11,4 +13,8 @@ Then:
 TODO:
 * Add castling
 * Add En Passant
-* 
+* Improve check functionality
+* Add checkmate functionality
+* Add Undo functionality
+* Show pieces taken on both sides
+* Multiplayer?
