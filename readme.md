@@ -1,6 +1,14 @@
-Run `tsc appSetup.ts generateMoves.ts`
+SETUP:
+* Download zip or clone repo
+* cd into project folder and run `tsc appSetup.ts generateMoves.ts`
 
 Then:
 * Option 1: Open up index.html via Chrome
-* Option 2: Run `npm install http-server` or install some simple server
-* Then run `http-server` and go to localhost:port
+* Option 2:
+  * Run `npm install http-server` or install some simple server
+  * Then run `http-server` and go to localhost:port
+
+TODO:
+* Add castling
+* Add En Passant
+* 
