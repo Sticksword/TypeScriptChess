@@ -7,11 +7,14 @@ QUnit.module("chessTests", {
   }
 });
 
-QUnit.test("muh foyst test", () => {
-  console.log('hello');
-  assert.ok( 1 == "1", "Passed!" );
+QUnit.test("muh foyst test", function( assert ) {
+  // Example:
+  // function innertest(input, expected) {
+  //   assert.equal(funcToBeTested(input), expected);
+  // }
+  // innertest('a','b');
+  console.log('hello from tests.js!');
+  assert.ok( "1" == "1", "Passed!" );
 });
 
-// QUnit.test( "hello test", function( assert ) {
-//   assert.ok( 1 == "1", "Passed!" );
-// });
+

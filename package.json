@@ -7,7 +7,7 @@
   "devDependencies": {},
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
-    "compile": "tsc appSetup.ts generateMoves.ts pieces/Piece.ts pieces/RookPiece.ts pieces/KnightPiece.ts pieces/BishopPiece.ts pieces/QueenPiece.ts pieces/KingPiece.ts pieces/PawnPiece.ts",
+    "compile": "tsc appSetup.ts generateMoves.ts pieces/Piece.ts pieces/RookPiece.ts pieces/KnightPiece.ts pieces/BishopPiece.ts pieces/QueenPiece.ts pieces/KingPiece.ts pieces/PawnPiece.ts tests.ts",
     "clean": "rm *.js pieces/*.js"
   },
   "repository": {
