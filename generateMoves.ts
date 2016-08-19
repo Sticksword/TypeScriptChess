@@ -3,6 +3,8 @@
 ======================================================= */ 
 
 function generateMoves(piece, row, col, color): string[] {
+  // @params
+  // color: piece color
   // generate list of coordinates for possible moves
   switch(color) {
     case "white":
@@ -249,9 +251,12 @@ function generatePawnMoves(row, col, color): string[] {
   var moves: string[] = [];
   if (color === "white") { // white pawn options
     var newRow = parseInt(row) - 1;
+    // traditional forward move
     if (document.getElementById(newRow + "-" + col).innerHTML === "") {
       moves.push(newRow + "-" + col);
     }
+    
+    // capturing
     var newCol = parseInt(col) + 1;
     if (newCol < 8) {
       var target = document.getElementById(newRow + "-" + newCol).innerHTML;
@@ -278,6 +283,7 @@ function generatePawnMoves(row, col, color): string[] {
         }
       }
     }
+
     if (parseInt(row) === 6) { // can move 2 tiles if it hasn't moved
       newRow--;
       if (document.getElementById(newRow + "-" + col).innerHTML === "") {

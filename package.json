@@ -1,0 +1,23 @@
+{
+  "name": "typescript-chess",
+  "version": "1.0.0",
+  "description": "my typescript implementation of chess",
+  "main": "appSetup.js",
+  "dependencies": {},
+  "devDependencies": {},
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "compile": "tsc appSetup.ts generateMoves.ts pieces/Piece.ts pieces/RookPiece.ts pieces/KnightPiece.ts pieces/BishopPiece.ts pieces/QueenPiece.ts pieces/KingPiece.ts pieces/PawnPiece.ts",
+    "clean": "rm *.js pieces/*.js"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/Sticksword/TypeScriptChess.git"
+  },
+  "author": "Michael Chen",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/Sticksword/TypeScriptChess/issues"
+  },
+  "homepage": "https://github.com/Sticksword/TypeScriptChess#readme"
+}

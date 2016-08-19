@@ -1,15 +1,10 @@
+/// <reference path="node_modules/@types/qunit/index.d.ts" />
+
 /* =======================================================
  * Michael Chen
  * TypeScript Converted Chess Implementation
  * Tested by playing out a game of chess
  *
- * Initial thoughts:
- * Use the html as my storage for the board and pieces.
- * I will try to separate logic into four parts
-    1. set up board and variables
-    2. process input
-    3. generate possible moves
-    4. helper methods
 
 /* =======================================================
  * Code is split into two parts:
@@ -26,7 +21,7 @@
  * Initial Variable Setup
 ======================================================= */ 
 
-var pieces = {}
+var pieces = {};
 // set up two way dictionary
 // word to unicode to improve readability when assigning unicode to pieces
 // unicode to word to improve readability when checking what piece is selected
@@ -65,6 +60,8 @@ var currentPieceLocation: string = "";
 var whiteKingLocation: string = "7-4";
 var blackKingLocation: string = "0-4";
 
+var tempPieces = {};
+
 /* =======================================================
  * Process Input
 ======================================================= */ 
@@ -85,7 +82,16 @@ function processClick(): void {
   if (whiteTurn) {
     var piece = identifyPiece(this.innerHTML);
     var coordinates = this.id.split("-");
-    valid_moves = generateMoves(piece, coordinates[0], coordinates[1], "white");
+    // testing
+    if (piece.split("_")[1] == "knight") {
+      console.log("hello from processClick");
+      console.log(this.innerHTML);
+      console.log(tempPieces[this.innerHTML]); //????
+      valid_moves = tempPieces[this.innerHTML].genMoves(coordinates[0], coordinates[1]);
+    } else {
+      valid_moves = generateMoves(piece, coordinates[0], coordinates[1], "white");
+    }
+    // end testing
     if (valid_moves.length > 0) {
       currentPiece = piece;
       currentPieceLocation = this.id;
@@ -114,15 +120,19 @@ function makeMove(piece, rowDest, colDest): void {
   document.getElementById(currentPieceLocation).innerHTML = "";
   document.getElementById(currentPieceLocation).classList.remove("occupied");
   currentPieceLocation = rowDest + "-" + colDest;
+
+  // pawn promotion
   if (piece === "black_pawn" && rowDest === "7") {
     piece = "black_queen";
   }
   if (piece === "white_pawn" && rowDest === "0") {
     piece = "white_queen";
   }
+
   document.getElementById(currentPieceLocation).innerHTML = pieces[piece];
   document.getElementById(currentPieceLocation).classList.add("occupied");
 
+  // CHECK functionality ---------------
   if (piece === "black_king") {
     blackKingLocation = rowDest + "-" + colDest;
   }
@@ -230,9 +240,16 @@ function setupBoard(): void {
   setupPieces();
 }
 
+function createPieces(): void {
+  tempPieces["\u2658"] = new KnightPiece("knight", "\u2658", "white");
+  tempPieces["\u265E"] = new KnightPiece("knight", "\u265E", "black");
+
+}
+
 function setupPieces(): void {
+  createPieces();
   document.getElementById("0-0").innerHTML = pieces["black_rook"];
-  document.getElementById("0-1").innerHTML = pieces["black_knight"];
+  document.getElementById(tempPieces["\u265E"].startingLocation).innerHTML = tempPieces["\u265E"].unicode;
   document.getElementById("0-2").innerHTML = pieces["black_bishop"];
   document.getElementById("0-3").innerHTML = pieces["black_queen"];
   document.getElementById("0-4").innerHTML = pieces["black_king"];
@@ -248,7 +265,7 @@ function setupPieces(): void {
   }
 
   document.getElementById("7-0").innerHTML = pieces["white_rook"];
-  document.getElementById("7-1").innerHTML = pieces["white_knight"];
+  document.getElementById(tempPieces["\u2658"].startingLocation).innerHTML = tempPieces["\u2658"].unicode;
   document.getElementById("7-2").innerHTML = pieces["white_bishop"];
   document.getElementById("7-3").innerHTML = pieces["white_queen"];
   document.getElementById("7-4").innerHTML = pieces["white_king"];
